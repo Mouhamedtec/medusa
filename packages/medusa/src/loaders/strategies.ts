@@ -21,8 +21,8 @@ export default ({ container, configModule, isTest }: LoaderOptions): void => {
     typeof isTest !== "undefined" ? isTest : process.env.NODE_ENV === "test"
 
   const corePath = useMock
-    ? "../strategies/__mocks__/*.js"
-    : "../strategies/**/*.js"
+    ? "../strategies/__mocks__/[!__]*.js"
+    : "../strategies/**/[!__]*.js"
   const coreFull = path.join(__dirname, corePath)
 
   const core = glob.sync(coreFull, { cwd: __dirname })
@@ -37,11 +37,10 @@ export default ({ container, configModule, isTest }: LoaderOptions): void => {
         asFunction((cradle) => new loaded(cradle, configModule))
       )
 
-      container.register({
-        [`batchType_${loaded.batchType}`]: asFunction(
-          (cradle) => new loaded(cradle, configModule)
-        ).singleton(),
-      })
+      container.registerAdd(
+        `batchType_${loaded.batchType}`,
+        asFunction((cradle) => new loaded(cradle, configModule)).singleton()
+      )
 
       container.register({
         [name]: asFunction(

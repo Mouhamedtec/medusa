@@ -188,11 +188,12 @@ export function registerStrategies(
           asFunction((cradle) => new module(cradle, pluginDetails.options))
         )
 
-        container.register({
-          [`batchType_${module.batchType}`]: asFunction(
+        container.registerAdd(
+          `batchType_${module.batchType}`,
+          asFunction(
             (cradle) => new module(cradle, pluginDetails.options)
           ).singleton(),
-        })
+        )
 
         const name = formatRegistrationName(file)
         container.register({
