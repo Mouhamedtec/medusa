@@ -9,7 +9,7 @@ import middlewares, {
 export default (app) => {
   const route = Router()
 
-  app.use("/batch", route)
+  app.use("/batch-jobs", route)
 
   route.get(
     "/",

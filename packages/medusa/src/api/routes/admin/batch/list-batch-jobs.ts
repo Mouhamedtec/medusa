@@ -19,8 +19,8 @@ import { getListConfig } from "../../../../utils/get-query-config"
 import { validator } from "../../../../utils/validator"
 
 /**
- * @oas [get] /batch
- * operationId: "GetBatch"
+ * @oas [get] /batch-jobs
+ * operationId: "GetBatchJobs"
  * summary: "List Batch Jobs"
  * description: "Retrieve a list of Batch Jobs."
  * x-authenticated: true
