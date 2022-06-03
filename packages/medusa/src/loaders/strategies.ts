@@ -25,7 +25,10 @@ export default ({ container, configModule, isTest }: LoaderOptions): void => {
     : "../strategies/**/[!__]*.js"
   const coreFull = path.join(__dirname, corePath)
 
-  const core = glob.sync(coreFull, { cwd: __dirname })
+  const core = glob.sync(coreFull, {
+    cwd: __dirname,
+    ignore: ["**/__fixtures__/**", "index.js", "index.ts"],
+  })
   core.forEach((fn) => {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const loaded = require(fn).default
