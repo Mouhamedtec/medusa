@@ -221,7 +221,7 @@ class BatchJobService extends TransactionBaseService<BatchJobService> {
     })
   }
 
-  protected async updateStatus(
+  async updateStatus(
     batchJobOrId: BatchJob | string,
     status: BatchJobStatus
   ): Promise<BatchJob | never> {
