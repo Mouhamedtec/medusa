@@ -24,24 +24,24 @@ const setupJobDb = async (dbConnection) => {
 
     await simpleBatchJobFactory(dbConnection, {
       id: "job_1",
-      type: "batch_1",
+      type: "product-export",
       created_by: "admin_user",
     })
     await simpleBatchJobFactory(dbConnection, {
       id: "job_2",
-      type: "batch_2",
+      type: "product-export",
       awaiting_confirmation_at: new Date(),
       created_by: "admin_user",
     })
     await simpleBatchJobFactory(dbConnection, {
       id: "job_3",
-      type: "batch_2",
+      type: "product-export",
       awaiting_confirmation_at: new Date(),
       created_by: "admin_user",
     })
     await simpleBatchJobFactory(dbConnection, {
       id: "job_4",
-      type: "batch_1",
+      type: "product-export",
       status: "awaiting_confirmation",
       created_by: "member-user",
     })
@@ -162,8 +162,8 @@ describe("/admin/batch", () => {
       const response = await api.post(
         "/admin/batch",
         {
-          type: "batch_1",
-          context: JSON.stringify({}),
+          type: "product-export",
+          context: {},
         },
         adminReqConfig
       )
@@ -212,7 +212,7 @@ describe("/admin/batch", () => {
         await setupJobDb(dbConnection)
         await simpleBatchJobFactory(dbConnection, {
           id: "job_complete",
-          type: "batch_1",
+          type: "product-export",
           created_by: "admin_user",
           completed_at: new Date(),
         })

@@ -1,5 +1,5 @@
-import { IsBoolean, IsJSON, IsOptional, IsString } from "class-validator"
-import { AbstractBatchJobStrategy } from "../../../../interfaces/batch-job-strategy"
+import { IsBoolean, IsObject, IsOptional, IsString } from "class-validator"
+import { AbstractBatchJobStrategy } from "../../../../interfaces"
 import BatchJobService from "../../../../services/batch-job"
 import { validator } from "../../../../utils/validator"
 
@@ -49,7 +49,7 @@ export class AdminPostBatchesReq {
   @IsString()
   type: string
 
-  @IsJSON()
+  @IsObject()
   context: Record<string, unknown>
 
   @IsBoolean()

@@ -40,16 +40,12 @@ export default ({ container, configModule, isTest }: LoaderOptions): void => {
         asFunction((cradle) => new loaded(cradle, configModule))
       )
 
-      container.registerAdd(
-        `batchType_${loaded.batchType}`,
-        asFunction((cradle) => new loaded(cradle, configModule)).singleton()
-      )
-
       container.register({
         [name]: asFunction(
           (cradle) => new loaded(cradle, configModule)
         ).singleton(),
         [`batch_${loaded.identifier}`]: aliasTo(name),
+        [`batchType_${loaded.batchType}`]: aliasTo(name),
       })
     } else {
       container.register({
