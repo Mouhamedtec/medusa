@@ -1,4 +1,3 @@
-import { MedusaError } from "medusa-core-utils"
 import { Type } from "class-transformer"
 import {
   IsArray,
@@ -26,7 +25,11 @@ import { validator } from "../../../../utils/validator"
  *   - (query) limit {string} The number of collections to return.
  *   - (query) offset {string} The offset of collections to return.
  *   - (query) type {string | string[]} Filter by the batch type
- *   - (query) status {string} Filter by the status of the batch operation
+ *   - (query) confirmed_at {DateComparisonOperator} Date comparison for when resulting collections was confirmed, i.e. less than, greater than etc.
+ *   - (query) pre_processed_at {DateComparisonOperator} Date comparison for when resulting collections was pre processed, i.e. less than, greater than etc.
+ *   - (query) completed_at {DateComparisonOperator} Date comparison for when resulting collections was completed, i.e. less than, greater than etc.
+ *   - (query) failed_at {DateComparisonOperator} Date comparison for when resulting collections was failed, i.e. less than, greater than etc.
+ *   - (query) canceled_at {DateComparisonOperator} Date comparison for when resulting collections was canceled, i.e. less than, greater than etc.
  *   - (query) order {string} Order used when retrieving batch jobs
  *   - (query) expand[] {string} (Comma separated) Which fields should be expanded in each order of the result.
  *   - (query) fields[] {string} (Comma separated) Which fields should be included in each order of the result.
@@ -129,11 +132,7 @@ export class AdminGetBatchParams extends AdminGetBatchPaginationParams {
 
   @IsOptional()
   @Type(() => DateComparisonOperator)
-  processing_at?: DateComparisonOperator
-
-  @IsOptional()
-  @Type(() => DateComparisonOperator)
-  pre_processing_at?: DateComparisonOperator
+  pre_processed_at?: DateComparisonOperator
 
   @IsOptional()
   @Type(() => DateComparisonOperator)
@@ -142,10 +141,6 @@ export class AdminGetBatchParams extends AdminGetBatchPaginationParams {
   @IsOptional()
   @Type(() => DateComparisonOperator)
   failed_at?: DateComparisonOperator
-
-  @IsOptional()
-  @Type(() => DateComparisonOperator)
-  ready_at?: DateComparisonOperator
 
   @IsOptional()
   @Type(() => DateComparisonOperator)
